@@ -33,7 +33,7 @@ def output_template(template_text):
     print(template_text)
 
 def output_keywords():
-    print("""Common keywords:
+    print("""Common keywords for search:
           - makedepends
           - depends
           - distfiles
