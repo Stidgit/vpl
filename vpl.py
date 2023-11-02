@@ -4,7 +4,7 @@ import re
 import sys
 
 def help_message():
-    print("""vpl: No arguments found\n-h, --help for more information.\n-s, --search to search for template fields""")
+    print("""vpl: No arguments found\n-h, --help for more information.\n-s, --search to search for template fields:wq""")
 
 # Use GET request to pull a specified package template
 def get_template(package_name):
