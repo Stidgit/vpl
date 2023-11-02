@@ -32,6 +32,22 @@ def output_argument(template_text, var_name):
 def output_template(template_text):
     print(template_text)
 
+def output_keywords():
+    print("""Common keywords:
+          - makedepends
+          - depends
+          - distfiles
+          - homepage
+          - version
+          - checksum
+          - short_desc
+          - license
+          - maintainer
+          - hostmakedepends
+          - build_style
+          - revision
+          - pkgname
+          """)
 def main():
     parser = argparse.ArgumentParser(description="void-package-lookup 0.1")
     parser.add_argument("-s", "--search", metavar='<package-name>', help="search for a field")
@@ -39,13 +55,18 @@ def main():
     parser.add_argument("-m", "--makedepends",  metavar='<package-name>', help="show make dependencies")
     parser.add_argument("-c", "--checksum", metavar='<package-name>', help="show package checksum")
     parser.add_argument("-v", "--version", metavar='<package-name>', help="show package version")
-    parser.add_argument("-d", "--depends", metavar='<package-name>', help="show dependencies")
+    parser.add_argument("-d", "--distfiles", metavar='<package-name>', help="show distfiles")
+    parser.add_argument("-k", "--keywords", action="store_true", help="show common keywords for search argument")
 
     args = parser.parse_args()
 
     if not any(vars(args).values()):
         help_message()
         sys.exit(1)
+    
+    if args.keywords:
+        output_keywords()
+        sys.exit(0)
 
     package_name = None
     for arg_name, value in vars(args).items():
@@ -63,10 +84,12 @@ def main():
         output_argument(template_text, "checksum")
     elif args.version:
         output_argument(template_text, "version")
-    elif args.depends:
-        output_argument(template_text, "depends")
+    elif args.distfiles:
+        output_argument(template_text, "distfiles")
     elif args.search:
         output_argument(template_text, "search")
+    elif args.keywords:
+        output_keywords()
 
 if __name__ == "__main__":
     main()
