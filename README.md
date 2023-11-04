@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Void Package Lookup is a command-line tool designed to retrieve information from Void Linux package templates hosted on the official (Void Package Github)[https://github.com/void-linux/void-packages] page
+The Void Package Lookup is a command-line tool designed to retrieve information from Void Linux package templates hosted on the official [Void Package Github](https://github.com/void-linux/void-packages) page
 
 ## Arguments
 - `-s, --search <package-name>`: This will prompt you to use a search parameter, "version" for example.
