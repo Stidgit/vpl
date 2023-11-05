@@ -5,8 +5,7 @@ import sys
 
 def help_message():
     print("""vpl: No arguments found\n-h, --help for more information.\n-s, --search to search for template fields""")
-
-# Use GET request to pull a specified package template
+    
 def get_template(package_name):
     url = f"https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/{package_name}/template"
     response = requests.get(url)
@@ -17,7 +16,6 @@ def get_template(package_name):
         print(f"GET Request failed. Status code: {response.status_code}")
         sys.exit(1)
 
-# Outputs package templates specified fields, eg. checksum
 def output_argument(template_text, var_name):
     if var_name == "search":
         var_name = input("Search: ")
