@@ -5,13 +5,16 @@ import sys
 
 def help_message():
     print("""vpl: No arguments found\n-h, --help for more information.\n-s, --search to search for template fields""")
+<<<<<<< HEAD:vpl.py
     
+=======
+
+>>>>>>> 7398c03 (changes):src/vpl.py
 def get_template(package_name):
     url = f"https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/{package_name}/template"
     response = requests.get(url)
     if response.status_code == 200:
-        content = response.text
-        return content
+        return response.text
     else:
         print(f"GET Request failed. Status code: {response.status_code}")
         sys.exit(1)
@@ -46,27 +49,10 @@ def output_keywords():
           - revision
           - pkgname
           """)
-def main():
-    parser = argparse.ArgumentParser(description="void-package-lookup 0.1")
-    parser.add_argument("-s", "--search", metavar='<package-name>', help="search for a field")
-    parser.add_argument("-p", "--package", metavar='<package-name>', help="show package template")
-    parser.add_argument("-m", "--makedepends",  metavar='<package-name>', help="show make dependencies")
-    parser.add_argument("-c", "--checksum", metavar='<package-name>', help="show package checksum")
-    parser.add_argument("-v", "--version", metavar='<package-name>', help="show package version")
-    parser.add_argument("-d", "--distfiles", metavar='<package-name>', help="show distfiles")
-    parser.add_argument("-k", "--keywords", action="store_true", help="show common keywords for search argument")
 
-    args = parser.parse_args()
-
-    if not any(vars(args).values()):
-        help_message()
-        sys.exit(1)
-    
-    if args.keywords:
-        output_keywords()
-        sys.exit(0)
-
+def process_arguments(args):
     package_name = None
+
     for arg_name, value in vars(args).items():
         if value:
             package_name = value
@@ -89,5 +75,24 @@ def main():
     elif args.keywords:
         output_keywords()
 
+def main():
+    parser = argparse.ArgumentParser(description="void-package-lookup 0.1")
+    parser.add_argument("-s", "--search", metavar='<package-name>', help="search for a field")
+    parser.add_argument("-p", "--package", metavar='<package-name>', help="show package template")
+    parser.add_argument("-m", "--makedepends",  metavar='<package-name>', help="show make dependencies")
+    parser.add_argument("-c", "--checksum", metavar='<package-name>', help="show package checksum")
+    parser.add_argument("-v", "--version", metavar='<package-name>', help="show package version")
+    parser.add_argument("-d", "--distfiles", metavar='<package-name>', help="show distfiles")
+    parser.add_argument("-k", "--keywords", action="store_true", help="show common keywords for search argument")
+
+    args = parser.parse_args()
+
+    if not any(vars(args).values()):
+        help_message()
+        sys.exit(1)
+
+    process_arguments(args)
+
 if __name__ == "__main__":
     main()
+
