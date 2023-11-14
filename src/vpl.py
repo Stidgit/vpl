@@ -5,11 +5,7 @@ import sys
 
 def help_message():
     print("""vpl: No arguments found\n-h, --help for more information.\n-s, --search to search for template fields""")
-<<<<<<< HEAD:vpl.py
-    
-=======
 
->>>>>>> 7398c03 (changes):src/vpl.py
 def get_template(package_name):
     url = f"https://raw.githubusercontent.com/void-linux/void-packages/master/srcpkgs/{package_name}/template"
     response = requests.get(url)
